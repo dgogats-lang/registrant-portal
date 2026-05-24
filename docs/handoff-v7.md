@@ -1,12 +1,12 @@
 # Registrant Portal — Handoff v7
 
-> **Session summary:** Profile page added (name only). Avatar dropdown menu replaces the old Profile nav link and Sign out button. Organization is stored per-registration (not on the user profile) and displayed on the dashboard alongside each event.
+> **Session summary:** Profile page, avatar dropdown menu, list/calendar toggle on dashboard, HOH brand colors applied throughout. Organization moved to the registrations table (per-registration, not per-user).
 
 ---
 
 ## Current State
 
-The app is fully working on the dev preview. All pages tested end-to-end in v6 remain intact.
+The app is fully working on the dev preview.
 
 **Preview (dev branch):** `https://registrant-portal-git-dev-david-g-projects1.vercel.app`  
 **Production (main branch):** `https://registrant-portal.vercel.app` — still has old scaffold, do not use until dev is merged
@@ -21,22 +21,39 @@ Run this in the Neon SQL editor before deploying:
 ALTER TABLE registrations ADD COLUMN organization TEXT;
 ```
 
-> If you previously ran `ALTER TABLE users ADD COLUMN organization TEXT;` from an earlier draft this session, that column is now unused and harmless — you can leave it or drop it with `ALTER TABLE users DROP COLUMN organization;`.
+> If you previously ran `ALTER TABLE users ADD COLUMN organization TEXT;`, that column is unused and harmless — leave it or drop it with `ALTER TABLE users DROP COLUMN organization;`.
 
 ---
 
 ## What Was Done This Session
 
-- **Profile page added** — `src/pages/profile.js`: email (read-only), editable first name and last name. Saves via PATCH to `/api/user/profile`.
-- **`/api/user/profile` route added** — handles GET and PATCH, session-protected.
-- **`updateUser` added to dataService** — updates `first_name` and `last_name` on the users table.
-- **Avatar dropdown menu** — `src/components/Layout.js` rebuilt. Profile and Sign out live in a dropdown triggered by a user-initials avatar button top-right. Shows user's name + email in the dropdown header.
-- **Organization moved to registrations** — org is per-registration (mirrors Quickbase reality). `organization TEXT` column added to the `registrations` table. `getEventsByUser` now selects it. Dashboard shows org under the event date when present.
-- **Pages updated** — `dashboard.js`, `events.js`, `profile.js` all pass `user` to Layout for the avatar initials.
+### Profile page
+- `src/pages/profile.js` — email (read-only), editable first name and last name. Saves via PATCH.
+- `src/pages/api/user/profile.js` — GET + PATCH, session-protected.
+- `lib/dataService.js` — `updateUser(userId, { firstName, lastName })` added.
 
-### Architecture decision: organization
+### Avatar dropdown menu
+- `src/components/Layout.js` rebuilt. Profile and Sign out moved into a dropdown triggered by a user-initials avatar button top-right. Dropdown header shows user name + email. Click-outside closes it.
+- Profile nav link removed from the main nav (now in dropdown only).
 
-Organization comes from Quickbase and is tied to each registration — a user could represent different orgs across events. Rather than storing a single org on the user profile (which would diverge from QB), org lives on the `registrations` table and is displayed per-event on the dashboard. If a canonical "preferred org" is needed in future, the right approach is to derive it from registrations at the point the Quickbase integration is built.
+### Organization — per-registration, not per-user
+Organization data comes from Quickbase and is tied to each registration — a user can represent different orgs across events. Rather than a user-level profile field, org lives on the `registrations` table and is shown per-event on the dashboard. A canonical "preferred org" can be derived from QB registration data when the Quickbase integration is built.
+
+### List/calendar toggle on dashboard
+- Toggle button (list icon / calendar icon) sits right of the "Your registrations" heading.
+- **List view** — unchanged from before.
+- **Calendar view** — monthly grid, events as colored pills matching status badge colors. Today's date highlighted. Multi-day events show a `→` suffix. Prev/next month navigation. Legend shows only statuses present in the user's registrations. Default month is the earliest upcoming event.
+- Month name enlarged (`text-lg font-bold`); nav buttons given visible borders.
+
+### HOH brand colors
+Indigo replaced throughout with Hiring Our Heroes brand colors:
+
+| Element | Color |
+|---------|-------|
+| Brand name, active nav, buttons, links, focus rings, avatar | HOH Blue `#0C2340` |
+| 3px header top stripe, today marker on calendar, sign out | HOH Red `#D92D27` |
+
+Status badge colors (amber, green, red, neutral) are unchanged — they serve a data-meaning purpose, not a brand purpose.
 
 ---
 
@@ -44,13 +61,16 @@ Organization comes from Quickbase and is tied to each registration — a user co
 
 | File | Change |
 |------|--------|
-| `schema.sql` | `organization TEXT` added to registrations (not users) |
-| `lib/dataService.js` | Added `updateUser`; `getEventsByUser` now selects `r.organization` |
-| `src/pages/api/user/profile.js` | New — GET + PATCH profile API (name only) |
+| `schema.sql` | `organization TEXT` added to registrations table |
+| `lib/dataService.js` | `updateUser` added; `getEventsByUser` selects `r.organization` |
+| `src/pages/api/user/profile.js` | New — GET + PATCH profile API |
 | `src/pages/profile.js` | New — profile page (first name, last name) |
-| `src/components/Layout.js` | Rebuilt with avatar dropdown menu |
-| `src/pages/dashboard.js` | Passes `user` to Layout; shows org per registration |
-| `src/pages/events.js` | Passes `user` to Layout; user added to getServerSideProps |
+| `src/components/Layout.js` | Avatar dropdown, HOH colors, red top stripe |
+| `src/pages/dashboard.js` | List/calendar toggle, calendar view, HOH colors |
+| `src/pages/events.js` | Passes `user` to Layout; HOH colors |
+| `src/pages/login.js` | HOH colors |
+| `src/pages/signup.js` | HOH colors |
+| `src/pages/verify.js` | HOH colors |
 
 ---
 
@@ -62,7 +82,7 @@ No new env vars. Same as v6.
 
 ## Known Issues (carried from v6)
 
-### Pending User Stuck State
+### Pending user stuck state
 
 If a user signs up but the magic link expires before they click it, their account stays `pending`. They can't sign up again and can't log in.
 
@@ -81,7 +101,6 @@ UPDATE users SET status = 'active' WHERE email = 'their@email.com';
 - [ ] **Run the `organization` column migration in Neon** (see above)
 - [ ] Verify a sending domain in Resend → update `RESEND_FROM`
 - [ ] Fix pending user stuck state in signup route
-- [ ] Seed more test events in Neon if needed
 
 ### When testing is complete
 - [ ] Merge `dev` → `main` to promote to production URL
