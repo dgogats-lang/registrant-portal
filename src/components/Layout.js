@@ -29,6 +29,7 @@ export default function Layout({ children }) {
           <nav className="flex items-center gap-1">
             <NavLink href="/dashboard">Dashboard</NavLink>
             <NavLink href="/events">Events</NavLink>
+            <NavLink href="/profile">Profile</NavLink>
             <form action="/api/auth/signout" method="POST" className="ml-3">
               <button
                 type="submit"
