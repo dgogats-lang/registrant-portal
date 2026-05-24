@@ -14,6 +14,14 @@ function formatDate(dateStr) {
   });
 }
 
+const statusStyles = {
+  'Accepted':         'bg-emerald-50 text-emerald-700 border-emerald-200',
+  'Pending Approval': 'bg-amber-50 text-amber-700 border-amber-200',
+  'Denied':           'bg-red-50 text-red-700 border-red-200',
+  'Cancelled':        'bg-neutral-100 text-neutral-500 border-neutral-200',
+  'Duplicate':        'bg-neutral-100 text-neutral-500 border-neutral-200',
+};
+
 export default function Dashboard({ user, registrations }) {
   const greeting = user.first_name ? `Welcome back, ${user.first_name}` : 'Welcome back';
 
@@ -55,14 +63,23 @@ export default function Dashboard({ user, registrations }) {
             <ul className="space-y-3">
               {registrations.map(reg => (
                 <li key={reg.id} className="bg-white rounded-xl border border-neutral-200 px-6 py-5">
-                  <p className="font-medium text-neutral-900">{reg.event_name}</p>
-                  <p className="text-sm text-neutral-500 mt-0.5">
-                    {formatDate(reg.event_start_date)}
-                    {reg.event_end_date ? ` – ${formatDate(reg.event_end_date)}` : ''}
-                  </p>
-                  <p className="text-xs text-neutral-400 mt-2">
-                    Registered on {formatDate(reg.registered_at)}
-                  </p>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      <p className="font-medium text-neutral-900">{reg.event_name}</p>
+                      <p className="text-sm text-neutral-500 mt-0.5">
+                        {formatDate(reg.event_start_date)}
+                        {reg.event_end_date ? ` – ${formatDate(reg.event_end_date)}` : ''}
+                      </p>
+                      <p className="text-xs text-neutral-400 mt-2">
+                        Registered on {formatDate(reg.registered_at)}
+                      </p>
+                    </div>
+                    {reg.registration_status && (
+                      <span className={`shrink-0 text-xs font-medium px-2.5 py-1 rounded-full border ${statusStyles[reg.registration_status] ?? 'bg-neutral-100 text-neutral-500 border-neutral-200'}`}>
+                        {reg.registration_status}
+                      </span>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>

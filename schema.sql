@@ -37,10 +37,12 @@ CREATE TABLE events (
 -- A user who appears here is a "registrant" for that event.
 -- ============================================================
 CREATE TABLE registrations (
-  id            SERIAL PRIMARY KEY,
-  user_id       INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  event_id      INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
-  date_created  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  id                   SERIAL PRIMARY KEY,
+  user_id              INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  event_id             INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+  registration_status  TEXT NOT NULL DEFAULT 'Pending Approval'
+                       CHECK (registration_status IN ('Accepted', 'Pending Approval', 'Denied', 'Cancelled', 'Duplicate')),
+  date_created         TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   UNIQUE (user_id, event_id)
 );
 
