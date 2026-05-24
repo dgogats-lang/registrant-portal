@@ -11,6 +11,7 @@ function formatDate(dateStr) {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
+    timeZone: 'UTC',
   });
 }
 
