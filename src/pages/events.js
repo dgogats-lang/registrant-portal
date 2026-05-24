@@ -15,7 +15,7 @@ function formatDate(dateStr) {
   });
 }
 
-export default function Events({ events }) {
+export default function Events({ events, user }) {
   const router = useRouter();
   const [registering, setRegistering] = useState({});
   const [errors, setErrors] = useState({});
@@ -46,7 +46,7 @@ export default function Events({ events }) {
   return (
     <>
       <Head><title>Events — Registrant Portal</title></Head>
-      <Layout>
+      <Layout user={user}>
         <div className="mb-8">
           <h1 className="text-2xl font-semibold text-neutral-900">Available events</h1>
           <p className="text-sm text-neutral-500 mt-1">
@@ -108,7 +108,7 @@ export async function getServerSideProps({ req }) {
 
     const events = await getAvailableEvents(user.id);
     return {
-      props: JSON.parse(JSON.stringify({ events })),
+      props: JSON.parse(JSON.stringify({ events, user })),
     };
   } catch {
     return { redirect: { destination: '/login', permanent: false } };

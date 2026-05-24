@@ -42,6 +42,7 @@ CREATE TABLE registrations (
   event_id             INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
   registration_status  TEXT NOT NULL DEFAULT 'Pending Approval'
                        CHECK (registration_status IN ('Accepted', 'Pending Approval', 'Denied', 'Cancelled', 'Duplicate')),
+  organization         TEXT,                        -- org the registrant represented at this event (from Quickbase)
   date_created         TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   UNIQUE (user_id, event_id)
 );

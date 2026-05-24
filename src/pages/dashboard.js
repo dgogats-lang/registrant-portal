@@ -28,7 +28,7 @@ export default function Dashboard({ user, registrations }) {
   return (
     <>
       <Head><title>Dashboard — Registrant Portal</title></Head>
-      <Layout>
+      <Layout user={user}>
         <div className="mb-8">
           <h1 className="text-2xl font-semibold text-neutral-900">{greeting}</h1>
           <p className="text-sm text-neutral-500 mt-1">{user.email}</p>
@@ -70,6 +70,9 @@ export default function Dashboard({ user, registrations }) {
                         {formatDate(reg.event_start_date)}
                         {reg.event_end_date ? ` – ${formatDate(reg.event_end_date)}` : ''}
                       </p>
+                      {reg.organization && (
+                        <p className="text-sm text-neutral-500 mt-0.5">{reg.organization}</p>
+                      )}
                       <p className="text-xs text-neutral-400 mt-2">
                         Registered on {formatDate(reg.registered_at)}
                       </p>
