@@ -86,7 +86,7 @@ export default function Profile({ user: initialUser }) {
                 value={form.firstName}
                 onChange={handleChange}
                 placeholder="Jane"
-                className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:border-[#0C2340]"
               />
             </div>
 
@@ -103,7 +103,7 @@ export default function Profile({ user: initialUser }) {
                 value={form.lastName}
                 onChange={handleChange}
                 placeholder="Smith"
-                className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:border-[#0C2340]"
               />
             </div>
 
@@ -122,7 +122,7 @@ export default function Profile({ user: initialUser }) {
             <button
               type="submit"
               disabled={saving}
-              className="rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="rounded-lg bg-[#0C2340] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0a1c30] focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {saving ? 'Saving…' : 'Save changes'}
             </button>

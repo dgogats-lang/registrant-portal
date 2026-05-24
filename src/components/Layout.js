@@ -10,7 +10,7 @@ function NavLink({ href, children }) {
       href={href}
       className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
         active
-          ? 'text-indigo-600 bg-indigo-50'
+          ? 'text-[#0C2340] bg-[#0C2340]/10'
           : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100'
       }`}
     >
@@ -60,8 +60,9 @@ export default function Layout({ children, user }) {
   return (
     <div className="min-h-screen bg-neutral-50">
       <header className="bg-white border-b border-neutral-200">
+        <div className="h-[3px] bg-[#D92D27]" />
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-semibold text-neutral-900 tracking-tight">
+          <span className="font-semibold text-[#0C2340] tracking-tight">
             Registrant Portal
           </span>
           <div className="flex items-center gap-1">
@@ -76,7 +77,7 @@ export default function Layout({ children, user }) {
                 onClick={() => setMenuOpen(prev => !prev)}
                 aria-label="User menu"
                 aria-expanded={menuOpen}
-                className="w-9 h-9 rounded-full bg-indigo-50 border border-indigo-200 flex items-center justify-center text-sm font-medium text-indigo-700 hover:bg-indigo-100 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="w-9 h-9 rounded-full bg-[#0C2340]/10 border border-[#0C2340]/25 flex items-center justify-center text-sm font-medium text-[#0C2340] hover:bg-[#0C2340]/20 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:ring-offset-2"
               >
                 {initials}
               </button>
@@ -112,7 +113,7 @@ export default function Layout({ children, user }) {
                   <form action="/api/auth/signout" method="POST">
                     <button
                       type="submit"
-                      className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                      className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#D92D27] hover:bg-[#D92D27]/5 transition-colors"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>

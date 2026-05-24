@@ -80,7 +80,7 @@ export default function Signup() {
                       value={form.firstName}
                       onChange={handleChange}
                       placeholder="Jane"
-                      className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:border-[#0C2340]"
                     />
                   </div>
                   <div>
@@ -95,7 +95,7 @@ export default function Signup() {
                       value={form.lastName}
                       onChange={handleChange}
                       placeholder="Smith"
-                      className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:border-[#0C2340]"
                     />
                   </div>
                 </div>
@@ -112,7 +112,7 @@ export default function Signup() {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="you@example.com"
-                    className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:border-[#0C2340]"
                   />
                 </div>
                 <div>
@@ -128,13 +128,13 @@ export default function Signup() {
                     value={form.inviteCode}
                     onChange={handleChange}
                     placeholder="Enter your invite code"
-                    className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:border-[#0C2340]"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={loading || !form.email || !form.inviteCode}
-                  className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="w-full rounded-lg bg-[#0C2340] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0a1c30] focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {loading ? 'Creating account…' : 'Create account'}
                 </button>
@@ -144,7 +144,7 @@ export default function Signup() {
 
           <p className="text-center text-sm text-neutral-500 mt-4">
             Already have an account?{' '}
-            <Link href="/login" className="text-indigo-600 font-medium hover:text-indigo-700">
+            <Link href="/login" className="text-[#0C2340] font-medium hover:text-[#0C2340]/70">
               Sign in
             </Link>
           </p>

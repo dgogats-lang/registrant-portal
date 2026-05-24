@@ -101,17 +101,17 @@ function CalendarView({ registrations }) {
         <button
           onClick={prevMonth}
           aria-label="Previous month"
-          className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 transition-colors"
+          className="p-2 rounded-lg border border-neutral-200 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 hover:border-neutral-300 transition-colors"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <span className="text-sm font-semibold text-neutral-900">
+        <span className="text-lg font-bold text-neutral-900">
           {MONTH_NAMES[month]} {year}
         </span>
         <button
           onClick={nextMonth}
           aria-label="Next month"
-          className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 transition-colors"
+          className="p-2 rounded-lg border border-neutral-200 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 hover:border-neutral-300 transition-colors"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
@@ -141,7 +141,7 @@ function CalendarView({ registrations }) {
                 <>
                   <div className={`text-xs font-medium w-6 h-6 flex items-center justify-center rounded-full mb-1 ${
                     isToday
-                      ? 'bg-indigo-600 text-white'
+                      ? 'bg-[#D92D27] text-white'
                       : 'text-neutral-400'
                   }`}>
                     {day}
@@ -240,7 +240,7 @@ export default function Dashboard({ user, registrations }) {
                 {view === 'list' && (
                   <Link
                     href="/events"
-                    className="text-sm text-indigo-600 font-medium hover:text-indigo-700"
+                    className="text-sm text-[#0C2340] font-medium hover:text-[#0C2340]/70"
                   >
                     Browse more events →
                   </Link>
@@ -283,7 +283,7 @@ export default function Dashboard({ user, registrations }) {
               </p>
               <Link
                 href="/events"
-                className="inline-block rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 transition-colors"
+                className="inline-block rounded-lg bg-[#0C2340] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0a1c30] transition-colors"
               >
                 Browse events
               </Link>
