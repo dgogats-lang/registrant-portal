@@ -282,26 +282,24 @@ export default function Dashboard({ user, registrations }) {
             <ul className="space-y-3">
               {registrations.map(reg => (
                 <li key={reg.id} className="bg-white rounded-xl border border-neutral-200 px-6 py-5">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="min-w-0">
-                      <p className="font-medium text-neutral-900">{reg.event_name}</p>
-                      <p className="text-sm text-neutral-500 mt-0.5">
-                        {formatDate(reg.event_start_date)}
-                        {reg.event_end_date ? ` – ${formatDate(reg.event_end_date)}` : ''}
-                      </p>
-                      {reg.organization && (
-                        <p className="text-sm text-neutral-500 mt-0.5">{reg.organization}</p>
-                      )}
-                      <p className="text-xs text-neutral-400 mt-2">
-                        Registered on {formatDate(reg.registered_at)}
-                      </p>
-                    </div>
+                  <div className="flex items-start justify-between gap-4 mb-1">
+                    <p className="font-medium text-neutral-900">{reg.event_name}</p>
                     {reg.registration_status && (
                       <span className={`shrink-0 text-xs font-medium px-2.5 py-1 rounded-full border ${statusStyles[reg.registration_status] ?? 'bg-neutral-100 text-neutral-500 border-neutral-200'}`}>
                         {reg.registration_status}
                       </span>
                     )}
                   </div>
+                  <p className="text-sm text-neutral-500">
+                    {formatDate(reg.event_start_date)}
+                    {reg.event_end_date ? ` – ${formatDate(reg.event_end_date)}` : ''}
+                  </p>
+                  {reg.organization && (
+                    <p className="text-sm text-neutral-500 mt-0.5">{reg.organization}</p>
+                  )}
+                  <p className="text-xs text-neutral-400 mt-2">
+                    Registered on {formatDate(reg.registered_at)}
+                  </p>
                 </li>
               ))}
             </ul>
