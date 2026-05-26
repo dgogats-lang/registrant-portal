@@ -221,6 +221,8 @@ function CalendarIcon() {
 export default function Dashboard({ user, registrations }) {
   const [view, setView] = useState('list');
   const greeting = user.first_name ? `Welcome back, ${user.first_name}` : 'Welcome back';
+  const today = new Date().toISOString().slice(0, 10);
+  const upcomingCount = registrations.filter(r => r.event_start_date >= today).length;
 
   return (
     <>
@@ -230,18 +232,14 @@ export default function Dashboard({ user, registrations }) {
           <h1 className="text-2xl font-semibold text-neutral-900">{greeting}</h1>
         </div>
 
-        {registrations.length > 0 && (() => {
-          const today = new Date().toISOString().slice(0, 10);
-          const upcoming = registrations.filter(r => r.event_start_date >= today).length;
-          return (
-            <div className="mb-8">
-              <div className="bg-neutral-100 rounded-lg p-4 inline-block">
-                <p className="text-neutral-500" style={{ fontSize: '13px' }}>Upcoming events</p>
-                <p className="text-2xl font-semibold text-neutral-900 mt-0.5">{upcoming}</p>
-              </div>
+        {registrations.length > 0 && (
+          <div className="mb-8">
+            <div className="bg-neutral-100 rounded-lg p-4 inline-block">
+              <p className="text-neutral-500" style={{ fontSize: '13px' }}>Upcoming events</p>
+              <p className="text-2xl font-semibold text-neutral-900 mt-0.5">{upcomingCount}</p>
             </div>
-          );
-        })()}
+          </div>
+        )}
 
         <section>
           <div className="flex items-center justify-between mb-4">
