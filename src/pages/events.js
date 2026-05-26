@@ -63,30 +63,40 @@ export default function Events({ events, user }) {
             {events.map(event => (
               <li
                 key={event.id}
-                className="bg-white rounded-xl border border-neutral-200 px-6 py-5 flex items-center justify-between gap-6"
+                className="bg-white rounded-xl border border-neutral-200 px-6 py-5"
               >
-                <div className="min-w-0">
-                  <p className="font-medium text-neutral-900">{event.event_name}</p>
-                  <p className="text-sm text-neutral-500 mt-0.5">
-                    {formatDate(event.event_start_date)}
-                    {event.event_end_date && event.event_end_date !== event.event_start_date ? ` – ${formatDate(event.event_end_date)}` : ''}
-                  </p>
-                  {errors[event.id] && (
-                    <p className="text-xs text-red-600 mt-1.5">{errors[event.id]}</p>
+                <div className="flex items-center justify-between gap-6">
+                  <div className="min-w-0">
+                    <p className="font-medium text-neutral-900">{event.event_name}</p>
+                    <p className="text-sm text-neutral-500 mt-0.5">
+                      {formatDate(event.event_start_date)}
+                      {event.event_end_date && event.event_end_date !== event.event_start_date ? ` – ${formatDate(event.event_end_date)}` : ''}
+                    </p>
+                    {errors[event.id] && (
+                      <p className="text-xs text-red-600 mt-1.5">{errors[event.id]}</p>
+                    )}
+                  </div>
+                  {event.is_registered ? (
+                    <span className="shrink-0 rounded-lg bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-500">
+                      Registered
+                    </span>
+                  ) : (
+                    <button
+                      onClick={() => handleRegister(event.id)}
+                      disabled={!!registering[event.id]}
+                      className="shrink-0 rounded-lg bg-[#0C2340] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0a1c30] focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {registering[event.id] ? 'Registering…' : 'Register'}
+                    </button>
                   )}
                 </div>
-                {event.is_registered ? (
-                  <span className="shrink-0 rounded-lg bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-500">
-                    Registered
-                  </span>
-                ) : (
-                  <button
-                    onClick={() => handleRegister(event.id)}
-                    disabled={!!registering[event.id]}
-                    className="shrink-0 rounded-lg bg-[#0C2340] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0a1c30] focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  >
-                    {registering[event.id] ? 'Registering…' : 'Register'}
-                  </button>
+                {event.event_style && (
+                  <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-neutral-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 text-neutral-400 shrink-0">
+                      <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-2.003 3.5-4.697 3.5-8.327a8.25 8.25 0 00-16.5 0c0 3.63 1.556 6.324 3.5 8.327a19.58 19.58 0 002.683 2.282 16.975 16.975 0 001.144.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs text-neutral-400">{event.event_style}</span>
+                  </div>
                 )}
               </li>
             ))}
