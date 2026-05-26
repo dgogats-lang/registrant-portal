@@ -237,15 +237,6 @@ export default function Dashboard({ user, registrations }) {
 
             {registrations.length > 0 && (
               <div className="flex items-center gap-3">
-                {view === 'list' && (
-                  <Link
-                    href="/events"
-                    className="text-sm text-[#0C2340] font-medium hover:text-[#0C2340]/70"
-                  >
-                    Browse more events →
-                  </Link>
-                )}
-
                 {/* View toggle */}
                 <div className="flex rounded-lg border border-neutral-200 overflow-hidden">
                   <button
