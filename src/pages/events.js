@@ -69,7 +69,7 @@ export default function Events({ events, user }) {
                   <p className="font-medium text-neutral-900">{event.event_name}</p>
                   <p className="text-sm text-neutral-500 mt-0.5">
                     {formatDate(event.event_start_date)}
-                    {event.event_end_date ? ` – ${formatDate(event.event_end_date)}` : ''}
+                    {event.event_end_date && event.event_end_date !== event.event_start_date ? ` – ${formatDate(event.event_end_date)}` : ''}
                   </p>
                   {errors[event.id] && (
                     <p className="text-xs text-red-600 mt-1.5">{errors[event.id]}</p>

@@ -292,7 +292,7 @@ export default function Dashboard({ user, registrations }) {
                   </div>
                   <p className="text-sm text-neutral-500">
                     {formatDate(reg.event_start_date)}
-                    {reg.event_end_date ? ` – ${formatDate(reg.event_end_date)}` : ''}
+                    {reg.event_end_date && reg.event_end_date !== reg.event_start_date ? ` – ${formatDate(reg.event_end_date)}` : ''}
                   </p>
                   {reg.organization && (
                     <p className="text-sm text-neutral-500 mt-0.5">{reg.organization}</p>
