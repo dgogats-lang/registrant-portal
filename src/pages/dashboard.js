@@ -300,6 +300,14 @@ export default function Dashboard({ user, registrations }) {
                   <p className="text-xs text-neutral-400 mt-2">
                     Registered on {formatDate(reg.registered_at)}
                   </p>
+                  {reg.event_style && (
+                    <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-neutral-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 text-neutral-400 shrink-0">
+                        <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-2.003 3.5-4.697 3.5-8.327a8.25 8.25 0 00-16.5 0c0 3.63 1.556 6.324 3.5 8.327a19.58 19.58 0 002.683 2.282 16.975 16.975 0 001.144.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-xs text-neutral-400">{reg.event_style}</span>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
