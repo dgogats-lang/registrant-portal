@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Layout from '@/components/Layout';
 import { verifyToken } from '../../lib/auth';
-import { getUserByEmail, getAvailableEvents } from '../../lib/dataService';
+import { getUserByEmail, getAllEventsWithStatus } from '../../lib/dataService';
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
@@ -48,17 +48,15 @@ export default function Events({ events, user }) {
       <Head><title>Events — Registrant Portal</title></Head>
       <Layout user={user}>
         <div className="mb-8">
-          <h1 className="text-2xl font-semibold text-neutral-900">Available events</h1>
+          <h1 className="text-2xl font-semibold text-neutral-900">Events</h1>
           <p className="text-sm text-neutral-500 mt-1">
-            Events you haven't registered for yet.
+            Browse and register for upcoming events.
           </p>
         </div>
 
         {events.length === 0 ? (
           <div className="bg-white rounded-xl border border-neutral-200 px-6 py-14 text-center">
-            <p className="text-neutral-500 text-sm">
-              You're registered for all available events.
-            </p>
+            <p className="text-neutral-500 text-sm">No events are available right now.</p>
           </div>
         ) : (
           <ul className="space-y-3">
@@ -77,13 +75,19 @@ export default function Events({ events, user }) {
                     <p className="text-xs text-red-600 mt-1.5">{errors[event.id]}</p>
                   )}
                 </div>
-                <button
-                  onClick={() => handleRegister(event.id)}
-                  disabled={!!registering[event.id]}
-                  className="shrink-0 rounded-lg bg-[#0C2340] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0a1c30] focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  {registering[event.id] ? 'Registering…' : 'Register'}
-                </button>
+                {event.is_registered ? (
+                  <span className="shrink-0 rounded-lg bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-500">
+                    Registered
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => handleRegister(event.id)}
+                    disabled={!!registering[event.id]}
+                    className="shrink-0 rounded-lg bg-[#0C2340] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0a1c30] focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {registering[event.id] ? 'Registering…' : 'Register'}
+                  </button>
+                )}
               </li>
             ))}
           </ul>
@@ -106,7 +110,7 @@ export async function getServerSideProps({ req }) {
       return { redirect: { destination: '/login', permanent: false } };
     }
 
-    const events = await getAvailableEvents(user.id);
+    const events = await getAllEventsWithStatus(user.id);
     return {
       props: JSON.parse(JSON.stringify({ events, user })),
     };
