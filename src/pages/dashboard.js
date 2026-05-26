@@ -234,7 +234,7 @@ export default function Dashboard({ user, registrations }) {
 
         {registrations.length > 0 && (
           <div className="mb-8">
-            <div className="bg-neutral-100 rounded-lg p-4 inline-block">
+            <div className="bg-neutral-100 rounded-lg p-4 inline-block text-center">
               <p className="text-neutral-500" style={{ fontSize: '13px' }}>Upcoming events</p>
               <p className="text-2xl font-semibold text-neutral-900 mt-0.5">{upcomingCount}</p>
             </div>
