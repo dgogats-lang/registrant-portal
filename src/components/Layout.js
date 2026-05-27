@@ -76,7 +76,7 @@ export default function Layout({ children, user }) {
                 onClick={() => setMenuOpen(prev => !prev)}
                 aria-label="User menu"
                 aria-expanded={menuOpen}
-                className="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-sm font-medium text-white hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0C2340]"
+                className="w-9 h-9 rounded-full bg-[#D92D27] flex items-center justify-center text-sm font-medium text-white hover:bg-[#b82420] transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0C2340]"
               >
                 {initials}
               </button>
