@@ -10,8 +10,8 @@ function NavLink({ href, children }) {
       href={href}
       className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
         active
-          ? 'text-[#0C2340] bg-[#0C2340]/10'
-          : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100'
+          ? 'text-white bg-white/20'
+          : 'text-white/70 hover:text-white hover:bg-white/10'
       }`}
     >
       {children}
@@ -59,10 +59,9 @@ export default function Layout({ children, user }) {
 
   return (
     <div className="min-h-screen bg-neutral-50">
-      <header className="bg-white border-b border-neutral-200">
-        <div className="h-[3px] bg-[#D92D27]" />
+      <header className="bg-[#0C2340]">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-semibold text-[#0C2340] tracking-tight">
+          <span className="font-semibold text-white tracking-tight">
             Registrant Portal
           </span>
           <div className="flex items-center gap-1">
@@ -77,7 +76,7 @@ export default function Layout({ children, user }) {
                 onClick={() => setMenuOpen(prev => !prev)}
                 aria-label="User menu"
                 aria-expanded={menuOpen}
-                className="w-9 h-9 rounded-full bg-[#0C2340]/10 border border-[#0C2340]/25 flex items-center justify-center text-sm font-medium text-[#0C2340] hover:bg-[#0C2340]/20 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:ring-offset-2"
+                className="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-sm font-medium text-white hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0C2340]"
               >
                 {initials}
               </button>

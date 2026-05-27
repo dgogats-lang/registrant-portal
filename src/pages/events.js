@@ -84,7 +84,7 @@ export default function Events({ events, user }) {
                     <button
                       onClick={() => handleRegister(event.id)}
                       disabled={!!registering[event.id]}
-                      className="shrink-0 rounded-lg bg-[#0C2340] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0a1c30] focus:outline-none focus:ring-2 focus:ring-[#0C2340] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className="shrink-0 rounded-lg bg-[#D92D27] px-4 py-2 text-sm font-semibold text-white hover:bg-[#b82420] focus:outline-none focus:ring-2 focus:ring-[#D92D27] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       {registering[event.id] ? 'Registering…' : 'Register'}
                     </button>

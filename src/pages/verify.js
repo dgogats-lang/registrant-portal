@@ -56,7 +56,7 @@ export default function Verify() {
           <div className="bg-white rounded-2xl border border-neutral-200 shadow-sm p-8 text-center">
             {status === 'loading' && (
               <>
-                <div className="w-10 h-10 rounded-full border-2 border-[#0C2340] border-t-transparent animate-spin mx-auto mb-5" />
+                <div className="w-10 h-10 rounded-full border-2 border-[#D92D27] border-t-transparent animate-spin mx-auto mb-5" />
                 <h1 className="text-lg font-semibold text-neutral-900">Logging you in…</h1>
                 <p className="text-sm text-neutral-500 mt-1">Just a moment.</p>
               </>
@@ -85,7 +85,7 @@ export default function Verify() {
                 <p className="text-sm text-neutral-600 mb-6">{errorMessage}</p>
                 <Link
                   href="/login"
-                  className="inline-block rounded-lg bg-[#0C2340] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#0a1c30] transition-colors"
+                  className="inline-block rounded-lg bg-[#D92D27] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#b82420] transition-colors"
                 >
                   Request a new link
                 </Link>

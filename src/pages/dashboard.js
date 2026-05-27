@@ -284,7 +284,7 @@ export default function Dashboard({ user, registrations }) {
               </p>
               <Link
                 href="/events"
-                className="inline-block rounded-lg bg-[#0C2340] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0a1c30] transition-colors"
+                className="inline-block rounded-lg bg-[#D92D27] px-4 py-2 text-sm font-semibold text-white hover:bg-[#b82420] transition-colors"
               >
                 Browse events
               </Link>
